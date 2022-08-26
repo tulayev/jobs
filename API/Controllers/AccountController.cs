@@ -57,6 +57,7 @@ namespace API.Controllers
             var user = new User
             {
                 Email = RegisterDto.Email,
+                UserName = RegisterDto.Email,
                 Name = RegisterDto.Name,
                 LastName = RegisterDto.LastName
             };

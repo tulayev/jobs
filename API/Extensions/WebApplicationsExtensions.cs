@@ -15,10 +15,10 @@ namespace API.Extensions
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var db = services.GetRequiredService<DbContext>();
+                    var db = services.GetRequiredService<AppDbContext>();
                     var userManager = services.GetRequiredService<UserManager<User>>();
                     await db.Database.MigrateAsync();
-                    await Seed.SeedData(db as AppDbContext, userManager);
+                    await Seed.SeedData(db, userManager);
                 }
                 catch (Exception ex)
                 {
