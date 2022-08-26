@@ -10,17 +10,7 @@ namespace Data.Seeders
         {
             if (!userManager.Users.Any()) 
             {
-                var users = new List<User>
-                {
-                    new User { Name = "Jon", LastName = "jon", Email = "jon@test.com" },
-                    new User { Name = "Tom", LastName = "tom", Email = "tom@test.com" },
-                    new User { Name = "Rob", LastName = "rob", Email = "rob@test.com" }
-                };
-
-                foreach (var user in users)
-                {
-                    await userManager.CreateAsync(user, "Pa$$w0rd");
-                }
+                await userManager.CreateAsync(new User { Name = "Jon", LastName = "jon", Email = "jon@test.com" }, "Pa$$w0rd");
             }
         }
     }
