@@ -1,6 +1,4 @@
-# MusicCloud
-
-## Social network for musicians and not only
+# Jobs App
 
 ### To run the app locally:
 
