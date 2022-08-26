@@ -33,7 +33,7 @@ namespace API.Controllers
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
             if (user == null)
-                return Unauthorized();
+                return BadRequest("Email or Password is incorrect");
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
@@ -59,7 +59,8 @@ namespace API.Controllers
                 Email = RegisterDto.Email,
                 UserName = RegisterDto.Email,
                 Name = RegisterDto.Name,
-                LastName = RegisterDto.LastName
+                LastName = RegisterDto.LastName,
+                Location = "my city"
             };
 
             var result = await _userManager.CreateAsync(user, RegisterDto.Password);
@@ -85,6 +86,7 @@ namespace API.Controllers
                 Name = user.Name,
                 LastName = user.LastName,
                 Location = user.Location,
+                Email = user.Email,
                 Token = _tokenService.CreateToken(user)
             };
     }

@@ -12,21 +12,21 @@ const initialState = {
 export const registerUser = createAsyncThunk(
     'user/registerUser',
     async (user, thunkApi) => {
-        return registerUserThunk('/auth/register', user, thunkApi)
+        return registerUserThunk('/account/register', user, thunkApi)
     }
 )
 
 export const loginUser = createAsyncThunk(
     'user/loginUser',
     async (user, thunkApi) => {
-        return loginUserThunk('/auth/login', user, thunkApi)
+        return loginUserThunk('/account/login', user, thunkApi)
     }
 )
 
 export const updateUser = createAsyncThunk(
     'user/updateUser',
     async (user, thunkApi) => {
-        return updateUserThunk('/auth/updateUser', user, thunkApi)
+        return updateUserThunk('/account/updateUser', user, thunkApi)
     }
 )
 
@@ -56,13 +56,13 @@ const userSlice = createSlice({
         },
         [registerUser.rejected]: (state, {payload}) => {
             state.isLoading = false
-            toast.error(payload)
+            payload.errors ? toast.error(payload.errors.email[0]) : toast.error(payload)
         },
         [loginUser.pending]: state => {
             state.isLoading = true
         },
         [loginUser.fulfilled]: (state, {payload}) => {
-            const {user} = payload
+            const user = payload
             state.isLoading = false 
             state.user = user
             addUserToLocalStorage(user) 

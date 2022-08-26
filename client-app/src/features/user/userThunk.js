@@ -3,10 +3,11 @@ import { logoutUser } from './userSlice'
 
 export const registerUserThunk = async (url, user, thunkApi) => {
     try {
-        const { data } = await api.post('url', user) 
+        const { data } = await api.post(url, user) 
         return data
     } catch (error) {
-        return thunkApi.rejectWithValue(error.resonse.data.msg) 
+        const {payload} = thunkApi.rejectWithValue(error)
+        return thunkApi.rejectWithValue(payload.response.data) 
     }
 }
 
@@ -15,7 +16,8 @@ export const loginUserThunk = async (url, user, thunkApi) => {
         const { data } = await api.post(url, user) 
         return data
     } catch (error) {
-        return thunkApi.rejectWithValue(error.resonse.data.msg) 
+        const {payload} = thunkApi.rejectWithValue(error)
+        return thunkApi.rejectWithValue(payload.response.data) 
     }
 }
 
@@ -32,6 +34,7 @@ export const updateUserThunk = async (url, user, thunkApi) => {
             thunkApi.dispatch(logoutUser())
             return thunkApi.rejectWithValue('Unauthorized. Logging out...') 
         }
-        return thunkApi.rejectWithValue(error.resonse.data.msg) 
+        const {payload} = thunkApi.rejectWithValue(error)
+        return thunkApi.rejectWithValue(payload.response.data) 
     }
 }
