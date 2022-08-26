@@ -217,6 +217,9 @@ project.lock.json
 # Development settings
 **/appsettings.json
 
+# Migrations
+**/Migrations/*
+
 # SpecFlow specific
 *.feature.cs
 *.feature.xlsx.*
