@@ -218,7 +218,10 @@ project.lock.json
 **/appsettings.json
 
 # Migrations
-**/Migrations/*
+**/Migrations
+
+# SQLite stuff
+**/jobsapp.*
 
 # SpecFlow specific
 *.feature.cs
