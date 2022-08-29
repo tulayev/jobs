@@ -14,7 +14,7 @@ namespace Data.Repository
         public Repository(AppDbContext db)
         {
             _db = db;
-            _dbSet = _db.Set<T>();
+            _dbSet = db.Set<T>();
         }
 
         public void Add(T entity)
@@ -70,12 +70,6 @@ namespace Data.Repository
             }
             
             return await query.FirstOrDefaultAsync();
-        }
-
-        public void Remove(int id)
-        {
-            T entity = _dbSet.Find(id);
-            Remove(entity);
         }
 
         public void Remove(T entity)

@@ -11,8 +11,6 @@ namespace Data.Repository.IRepository
         Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter = null, string includes = null);
 
         void Add(T entity);
-
-        void Remove(int id);
         
         void Remove(T entity);
         
