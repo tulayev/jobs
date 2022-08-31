@@ -20,7 +20,7 @@ namespace Data.Repository
 
             if (jobFromDb != null)
             {
-                jobFromDb.Name = job.Name;
+                
             }
         }
     }

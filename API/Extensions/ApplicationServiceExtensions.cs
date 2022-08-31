@@ -1,4 +1,6 @@
 using Data.Context;
+using Data.Repository;
+using Data.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions
@@ -20,6 +22,8 @@ namespace API.Extensions
                     policy.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
                 });
             });
+
+            services.AddScoped<IDbRepository, DbRepository>();
 
             return services;
         }    
