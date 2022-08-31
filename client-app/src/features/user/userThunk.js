@@ -23,7 +23,7 @@ export const loginUserThunk = async (url, user, thunkApi) => {
 
 export const updateUserThunk = async (url, user, thunkApi) => {
     try {
-        const { data } = await api.patch(url, user, {
+        const { data } = await api.put(url, user, {
             headers: {
                 authorization: `Bearer ${thunkApi.getState().user.user.token}`
             }

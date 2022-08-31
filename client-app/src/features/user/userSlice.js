@@ -26,7 +26,7 @@ export const loginUser = createAsyncThunk(
 export const updateUser = createAsyncThunk(
     'user/updateUser',
     async (user, thunkApi) => {
-        return updateUserThunk('/account/updateUser', user, thunkApi)
+        return updateUserThunk('/account/update', user, thunkApi)
     }
 )
 
@@ -48,7 +48,7 @@ const userSlice = createSlice({
             state.isLoading = true
         },
         [registerUser.fulfilled]: (state, {payload}) => {
-            const {user} = payload
+            const user = payload
             state.isLoading = false 
             state.user = user
             addUserToLocalStorage(user)
@@ -76,7 +76,7 @@ const userSlice = createSlice({
             state.isLoading = true
         },
         [updateUser.fulfilled]: (state, {payload}) => {
-            const {user} = payload
+            const user = payload
             state.isLoading = false 
             state.user = user
             addUserToLocalStorage(user) 

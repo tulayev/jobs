@@ -9,7 +9,6 @@ using Models;
 
 namespace API.Controllers
 {
-    [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]")]
     public class AccountController : ControllerBase
@@ -27,6 +26,7 @@ namespace API.Controllers
             _tokenService = tokenService;
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
@@ -45,6 +45,7 @@ namespace API.Controllers
             return Unauthorized();
         }
 
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto RegisterDto)
         {
@@ -71,6 +72,25 @@ namespace API.Controllers
             }
 
             return BadRequest("Error occured during the registration proccess");
+        }
+
+        [HttpPut("update")]
+        public async Task<ActionResult<UserDto>> Edit(UserDto userDto)
+        {
+            var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+
+            if (await _userManager.Users.AnyAsync(u => u.Email == userDto.Email) && user.Email != userDto.Email)
+            {
+                ModelState.AddModelError("email", "Email is already taken");
+                return ValidationProblem();
+            }
+
+            user.Name = userDto.Name;
+            user.LastName = userDto.LastName;
+            user.Email = userDto.Email;
+            user.Location = userDto.Location;
+
+            return GetUserObject(user);
         }
 
         [HttpGet]
