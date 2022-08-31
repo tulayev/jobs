@@ -23,7 +23,7 @@ namespace API.Controllers
                 return Ok(job);
             }
 
-            return BadRequest("Somethin went wrong");
+            return BadRequest("Something went wrong");
         }
     }
 }
