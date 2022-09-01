@@ -220,8 +220,10 @@ project.lock.json
 # Migrations
 **/Migrations
 
-# SQLite stuff
-**/jobsapp.*
+# SQLite db stuff
+**/*.db
+**/*.db-shm
+**/*.db-wal
 
 # SpecFlow specific
 *.feature.cs
