@@ -12,12 +12,11 @@ namespace API.Extensions
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
-            services.AddIdentityCore<User>(options => 
+            services.AddIdentity<User, IdentityRole>(options => 
             {
                 options.Password.RequireNonAlphanumeric = false;
             })
-            .AddEntityFrameworkStores<AppDbContext>()
-            .AddSignInManager<SignInManager<User>>();
+            .AddEntityFrameworkStores<AppDbContext>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => 
